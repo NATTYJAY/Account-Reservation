@@ -59,8 +59,8 @@ class LoginService{
                     'password'  => $request->password
                 ] ,
                 "api_details" => [
-                        "username"=> "MK_TEST_WD7TZCMQV7", 
-                        "password"=> "H5EQMQSHSURJNQ7UH2R78YAH6UN54ZP7"
+                        "username"=> "XXXXXXXXXXXXXXXXXXXXXX", // Secret API Username
+                        "password"=> "XXXXXXXXXXXXXXXXXXXXXX" // Secret API KEY
                 ]
             ];
             $userdata =(object)$user_arr;

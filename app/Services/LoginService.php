@@ -17,6 +17,7 @@ class LoginService{
     }
 
      public function LoginCurl_API($user_data){ 
+         
         $data_string = json_encode($user_data);
         $data = (object)$user_data;                                                               
         $api_key = $data->username;   
@@ -59,8 +60,8 @@ class LoginService{
                     'password'  => $request->password
                 ] ,
                 "api_details" => [
-                        "username"=> "XXXXXXXXXXXXXXXXXXXXXX", // Secret API Username
-                        "password"=> "XXXXXXXXXXXXXXXXXXXXXX" // Secret API KEY
+                        "username"=> "************", // Secret API Username
+                        "password"=> "************" // Secret API KEY
                 ]
             ];
             $userdata =(object)$user_arr;
@@ -68,6 +69,7 @@ class LoginService{
             if($apiReturnResult['requestSuccessful'] == true && $apiReturnResult['responseMessage'] == 'success' && $apiReturnResult['responseBody']['expiresIn'] != 0 ){
                 if (Auth::attempt($userdata->details,$request->remember)) {
                     $request->session()->put('api_token',$apiReturnResult['responseBody']['accessToken']);
+                    $request->session()->put('api_token_expired',$apiReturnResult['responseBody']['expiresIn']);
                     return redirect(route('dashboard')); // validation successful!
                 } else {   
                     return redirect(route('login'))->with('status','Email or Password is Incorrect.');  // validation not successful, send back to form 

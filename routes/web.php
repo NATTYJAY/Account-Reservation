@@ -16,20 +16,19 @@ Route::get('/', function () {
 });
 
 /*Login Route*/
-
 Route::middleware(['accountSession', 'auth'])->group(function () { 
     Route::get('/', 'ReserveAccountController@index')->name('dashboard');
     Route::get('/refForm', 'ReserveAccountController@show')->name('showAccountForm');
     Route::get('/reserve', 'ReserveAccountController@reserveAccount')->name('reserveAccount');
     Route::post('/createdReserved', 'ReserveAccountController@create')->name('createReserved');
+    Route::get('/reserve/{accountReference}', 'ReserveAccountController@showAllReservedAccount')->name('getAllReservedAccount');
     // Route::post('/post', 'PostController@create');
     // Route::get('/post/{id}', 'PostController@read')->name('edit.post');
     // Route::put('/post/{id}', 'PostController@update')->name('update.post');
     // Route::delete('/post/{id}', 'PostController@delete')->name('destroy.post');
 });
 
-
- Route::get('/test','ReserveAccountController@deleteSessionData');
+ Route::get('/test','ReserveAccountController@test');
 
 Route::get('logout', 'LoginController@logout');
 Route::get('login', array('uses' => 'LoginController@Login'));

@@ -16,9 +16,14 @@ class checkAccountReservedSession
     public function handle($request, Closure $next)
     {
         if($request->session()->has('api_token')){
-            return $next($request);
+            if($request->session()->has('api_token_expired') && $request->session()->get('api_token_expired') != 0){
+                return $next($request);
+            }
         }else{
             return redirect(route('login'))->with('error','Your Session has expired');
+            $request->session()->has('api_token');
+            $request->session()->has('api_token_expired');
+           
         }
         
     }

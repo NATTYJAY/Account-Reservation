@@ -24,12 +24,19 @@ class ReserveAccountController extends Controller
 
     public function create(Request $request){
         $created = $this->reserveSer->storeReservedAccount($request);
-        dd($created);
-        //return back()->with(['status'=>$this->postservice]);
+        return $created;
     }
-    // public function deleteSessionData(Request $request) {
-    //     $request->session()->forget('api_token');
-    //     echo "Data has been removed from session.";
-    //  }
+
+    public function showAllReservedAccount(Request $request, $accountReference){
+        //Method to view a reserved account 
+        $showReserved = $this->reserveSer->getReservedAccount($request, $accountReference);
+        dd( $showReserved);
+    }
+
+    public function deleteReservedAccount(Request $request, $accountNumber){
+        //method to delete an account
+        $deleteReserved = $this->reserveSer->deleteReservedAccount($request, $accountNumber);
+        dd($deleteReserved);
+    }
    
 }
